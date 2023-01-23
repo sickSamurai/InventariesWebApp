@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { DailyReportsService } from 'src/app/services/daily-report.service'
 
 import { Category } from '../../models/category.model'
 import { CategoriesService } from '../../services/categories.service'
@@ -11,7 +12,14 @@ import { CategoriesService } from '../../services/categories.service'
 export class NavbarComponent {
   categories = new Array<Category>()
 
-  constructor(private categoriesService: CategoriesService) {
+  updateReport() {
+    this.reportsService.getDailyReport().subscribe()
+  }
+
+  constructor(
+    private categoriesService: CategoriesService,
+    private reportsService: DailyReportsService
+  ) {
     this.categoriesService.updateCategories().subscribe()
     this.categoriesService
       .getCategories()

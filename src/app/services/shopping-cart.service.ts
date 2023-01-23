@@ -55,6 +55,7 @@ export class ShoppingCartService {
     return this.httpClient
       .post(this.billsUrl, bill)
       .pipe(tap(() => this.productsService.updateProducts().subscribe()))
+      .pipe(tap(() => this.transactions.next([])))
   }
 
   getDbTransactions() {
