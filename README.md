@@ -1,7 +1,5 @@
-# InventariesWebApp
+# Inventaries Web App
 
-Este proyecto fue hecho con Angular V15
-
-Para poder desplegarlo es necesario tener la linea de comandos de Angular actualizada a esa versión.
+Esta app web fue hecha con Angular 15.1.1, para poder correrlo es necesario tener dicha versión.
 
 El comando para desplegar la app es ng serve --open
