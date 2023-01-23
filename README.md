@@ -5,4 +5,4 @@ Esta app web fue hecha con Angular 15.1.1, para poder correrla es necesario tene
 El comando para desplegar la app es 
 > **ng serve --open**
 
-Se puede encontrar una breve documentación en: https://drive.google.com/open?id=10joKQe_rT1JDOck9lNeoyV0ZW7an0qPO&authuser=ldmckkb%40gmail.com&usp=drive_fs
+Se puede encontrar una breve documentación en: https://drive.google.com/file/d/10joKQe_rT1JDOck9lNeoyV0ZW7an0qPO/view
