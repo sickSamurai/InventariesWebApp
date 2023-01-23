@@ -20,8 +20,14 @@ export class ShoppingCartService {
 
   getTransactions = () => this.transactions.asObservable()
 
-  addProductToShoppingCart(product: Product) {
+  addProduct(product: Product) {
     this.productsInShoppingCart.push(product)
+    this.updateTransactions()
+  }
+
+  deleteProduct(productId: string) {
+    const productIndex = this.productsInShoppingCart.findIndex(product => product.id === productId)
+    this.productsInShoppingCart.splice(productIndex, 1)
     this.updateTransactions()
   }
 

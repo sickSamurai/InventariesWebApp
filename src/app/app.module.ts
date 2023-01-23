@@ -12,7 +12,6 @@ import { EmptyShoppingCartComponent } from './components/empty-shopping-cart/emp
 import { NavbarComponent } from './components/navbar/navbar.component'
 import { ProductItemComponent } from './components/product-item/product-item.component'
 import { ProductListComponent } from './components/product-list/product-list.component'
-import { ToastComponent } from './components/toast/toast.component'
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component'
 import { CategoryFormPageComponent } from './pages/category-form-page/category-form-page.component'
 import { CategoryListPageComponent } from './pages/category-list-page/category-list-page.component'
@@ -32,7 +31,6 @@ import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-c
     ProductsByCategoryPageComponent,
     CategoryListPageComponent,
     NavbarComponent,
-    ToastComponent,
     ProductItemComponent,
     ProductListComponent,
     TransactionsListComponent,

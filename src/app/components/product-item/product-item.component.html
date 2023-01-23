@@ -3,7 +3,10 @@
     <mat-card-title>{{ product.name }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div><b>Descripción:</b> {{ product.description }}</div>
+    <div *ngIf="product.description != ''; else noDescription">
+      <b>Descripción:</b> {{ product.description }}
+    </div>
+    <ng-template #noDescription><b>¡Sin Descripción!</b></ng-template>
     <div><b>Stock:</b> {{ product.stock }}</div>
     <div><b>Precio</b> {{ product.price | currency }}</div>
   </mat-card-content>
@@ -11,7 +14,7 @@
     <button (click)="addToShoppingCart()" mat-icon-button>
       <i class="fa-solid fa-cart-shopping"></i>
     </button>
-    <button mat-icon-button>
+    <button (click)="deleteFromShoppingCart()" mat-icon-button>
       <i class="fa-solid fa-trash"></i>
     </button>
     <button mat-icon-button>

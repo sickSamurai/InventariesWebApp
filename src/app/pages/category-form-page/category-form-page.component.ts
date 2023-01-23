@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { ToastComponent } from 'src/app/components/toast/toast.component'
 
 import { Category } from '../../models/category.model'
 import { CategoriesService } from '../../services/categories.service'
@@ -27,8 +26,8 @@ export class CategoryFormPageComponent {
     const categoryToSave = <Category>{ name, description }
     this.categoriesService.setCategoryToSave(categoryToSave)
     this.categoriesService.createCategory().subscribe({
-      next: () => this.snackBar.openFromComponent(ToastComponent, { duration: 2000, data: successMsg }),
-      error: () => this.snackBar.openFromComponent(ToastComponent, { duration: 2000, data: errorMsg })
+      next: () => this.snackBar.open(successMsg, undefined, { duration: 2000 }),
+      error: () => this.snackBar.open(errorMsg, undefined, { duration: 2000 })
     })
   }
 

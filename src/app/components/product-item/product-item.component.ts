@@ -12,7 +12,11 @@ export class ProductItemComponent {
   @Input() product?: Product
 
   addToShoppingCart() {
-    if (this.product) this.shoppingCartService.addProductToShoppingCart(this.product)
+    if (this.product) this.shoppingCartService.addProduct(this.product)
+  }
+
+  deleteFromShoppingCart() {
+    if (this.product) this.shoppingCartService.deleteProduct(this.product.id)
   }
 
   constructor(private shoppingCartService: ShoppingCartService) {}

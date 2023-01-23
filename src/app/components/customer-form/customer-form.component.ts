@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { Customer } from 'src/app/models/customer.model'
 
 import { ShoppingCartService } from '../../services/shopping-cart.service'
-import { ToastComponent } from '../toast/toast.component'
 
 interface CustomerFormControls {
   id: FormControl<string>
@@ -24,15 +23,16 @@ export class CustomerFormComponent {
   @Output() customerSubmit = new EventEmitter<Customer>()
 
   generateBill(customer: string) {
-    const errorMsg = "No hay unidades suficientes en el stock"
+    const errorMsg =
+      "¡Algunos productos no tienen suficientes unidades en la bodega, revisa bien los datos!"
     this.shoppingCartService
       .generateBill({ customer, transactions: this.shoppingCartService.getDbTransactions() })
       .subscribe({
-        error: () => this.snackBar.openFromComponent(ToastComponent, { data: errorMsg, duration: 1000 })
+        error: () => this.snackBar.open(errorMsg, undefined, { duration: 2000 })
       })
   }
 
-  submitUser() {
+  submitTransactions() {
     if (this.customerForm.invalid) return
     const { id, name, phone, email, address } = this.customerForm.value
     if (!id || !name) return

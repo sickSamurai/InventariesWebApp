@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs'
 import { ProductToDb } from 'src/app/models/product.model'
 import { ProductsService } from 'src/app/services/products.service'
 
-import { ToastComponent } from '../../components/toast/toast.component'
 import { Category } from '../../models/category.model'
 import { CategoriesService } from '../../services/categories.service'
 
@@ -26,6 +25,7 @@ export class ProductFormPageComponent implements OnDestroy {
   categories = new Array<Category>()
   productsForm: FormGroup<ProductsFormControls>
   subscriptionToCategories = new Subscription()
+  mode: "edition" | "creation" = "creation"
 
   submitProduct() {
     if (this.productsForm.invalid) return
@@ -34,8 +34,8 @@ export class ProductFormPageComponent implements OnDestroy {
     const errorMsg = "Hubo un error al crear este producto"
     const successMsg = "Producto creado con éxito"
     this.productsService.createProduct().subscribe({
-      next: () => this.snackbar.openFromComponent(ToastComponent, { data: successMsg, duration: 2000 }),
-      error: () => this.snackbar.openFromComponent(ToastComponent, { data: errorMsg, duration: 2000 })
+      next: () => this.snackbar.open(successMsg, undefined, { duration: 2000 }),
+      error: () => this.snackbar.open(errorMsg, undefined, { duration: 2000 })
     })
   }
 
