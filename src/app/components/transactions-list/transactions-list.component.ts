@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core'
-import { MatTableDataSource } from '@angular/material/table'
 
-import { Transaction, TransactionView } from '../../models/transaction.model'
+import { Transaction } from '../../models/transaction.model'
 import { ShoppingCartService } from '../../services/shopping-cart.service'
 
 @Component({
@@ -11,7 +10,6 @@ import { ShoppingCartService } from '../../services/shopping-cart.service'
 })
 export class TransactionsListComponent {
   @Input() transactions: Transaction[] = []
-  dataSource: MatTableDataSource<TransactionView> = new MatTableDataSource()
   displayedColumns = ["productName", "units", "subtotal"]
 
   getTotal = () =>
@@ -27,9 +25,5 @@ export class TransactionsListComponent {
     }))
   }
 
-  constructor(private shoppingCartService: ShoppingCartService) {
-    this.shoppingCartService
-      .getTransactions()
-      .subscribe(transactions => (this.dataSource.data = this.getTransactionViews(transactions)))
-  }
+  constructor(private shoppingCartService: ShoppingCartService) {}
 }
