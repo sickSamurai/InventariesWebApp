@@ -1,6 +1,8 @@
 # Inventaries Web App
+El backend de está app web está en:
+> https://github.com/sickSamurai/InventariesWebAPI.git
 
-Esta app web fue hecha con Angular 15.1.1, para poder correrla es necesario tener dicha versión.
+La app fue hecha con Angular 15.1.1, así que para poder ejecutarla es necesario tener dicha versión.
 
 El comando para desplegar la app es 
 > **ng serve --open**
