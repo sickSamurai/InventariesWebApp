@@ -1,10 +1,12 @@
-<ng-container *ngIf="transactions.length > 0; else noTransactions">
-  <app-transactions-list [transactions]="transactions"></app-transactions-list>
-</ng-container>
-<ng-template #noTransactions>
-  <mat-card>
-    <mat-card-content>
-      <h2>No se han hecho transacciones en el día</h2>
-    </mat-card-content>
-  </mat-card>
-</ng-template>
+<div>
+  <ng-container *ngIf="transactions.length > 0; else noTransactions">
+    <app-transactions-list [transactions]="transactions"></app-transactions-list>
+  </ng-container>
+  <ng-template #noTransactions>
+    <mat-card>
+      <mat-card-content>
+        <h2>No se han hecho transacciones en el día</h2>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>

@@ -1,0 +1,28 @@
+.pages-container {
+  height: calc(100vh - 64px);
+}
+
+h2 {
+  margin: 2% 2%;
+}
+
+mat-sidenav {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  max-height: 100vh;
+}
+
+a {
+  font-size: 13pt;
+}
+
+.active {
+  color: #673ab7;
+}
+
+button {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

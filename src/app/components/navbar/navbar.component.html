@@ -1,25 +1,16 @@
 <mat-toolbar color="primary">
   <div>
-    <a mat-icon-button routerLink="/">
-      <i class="fa-solid fa-house"></i>
-    </a>
-    <a
-      mat-button
-      *ngFor="let category of categories"
-      routerLink="/products-by-categories/{{ category.id }}"
-      routerLinkActive="active"
-    >
-      {{ category.name }}
-    </a>
+    <button (click)="menuClicked.emit()" mat-icon-button><i class="fa-solid fa-bars"></i></button>
+    <a mat-icon-button routerLink="/"><i class="fa-solid fa-house"></i></a>
   </div>
   <div>
     <a mat-button (click)="updateReport()" routerLinkActive="active" routerLink="/dailyReport">
       Reporte Diario
     </a>
     <a mat-button routerLink="/shoppingCart" routerLinkActive="active">Carrito de Compras</a>
-    <a (click)="setupProductCreation()" mat-button routerLink="/productForm" routerLinkActive="active"
-      >Crear Producto</a
-    >
+    <a (click)="setupProductCreation()" mat-button routerLink="/productForm" routerLinkActive="active">
+      Crear Producto
+    </a>
     <a mat-button routerLink="/categoryForm" routerLinkActive="active">Crear Categoría</a>
   </div>
 </mat-toolbar>

@@ -13,8 +13,8 @@ export class ProductsService {
   apiUrl = "https://localhost:7277/api/products"
   products = new BehaviorSubject<Product[]>([])
   productsByCategory = new BehaviorSubject<Product[]>([])
-  mode = new BehaviorSubject<Mode>("creation")
   productToEdit?: DbProduct
+  mode = new BehaviorSubject<Mode>("creation")
 
   setMode(mode: Mode) {
     this.mode.next(mode)

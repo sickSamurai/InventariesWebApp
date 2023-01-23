@@ -1,0 +1,26 @@
+<mat-sidenav-container class="example-container" [hasBackdrop]="true">
+  <mat-sidenav [opened]="opened" mode="over" disableClose>
+    <mat-nav-list>
+      <h2>Lista de Categorías</h2>
+      <mat-divider></mat-divider>
+      <a
+        *ngFor="let category of categories"
+        routerLink="/products-by-categories/{{ category.id }}"
+        routerLinkActive="active"
+        (click)="close()"
+        mat-list-item
+      >
+        {{ category.name }}
+      </a>
+      <button (click)="close()" mat-icon-button color="warn">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-navbar (menuClicked)="open()"></app-navbar>
+    <div class="pages-container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,14 +1,14 @@
-<ng-container *ngIf="transactions.length > 0; else emptyShoppingCart">
-  <div>
+<div>
+  <ng-container *ngIf="transactions.length > 0; else emptyShoppingCart">
     <app-transactions-list [transactions]="transactions"></app-transactions-list>
     <app-customer-form></app-customer-form>
-  </div>
-</ng-container>
+  </ng-container>
 
-<ng-template #emptyShoppingCart>
-  <mat-card>
-    <mat-card-content>
-      <h2>¡El carrito de compras está vació!</h2>
-    </mat-card-content>
-  </mat-card>
-</ng-template>
+  <ng-template #emptyShoppingCart>
+    <mat-card style="grid-column: span 2">
+      <mat-card-content>
+        <h2>¡El carrito de compras está vació!</h2>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>

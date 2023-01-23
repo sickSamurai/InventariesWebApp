@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { DbProduct } from 'src/app/models/product.model'
 import { ProductsService } from 'src/app/services/products.service'
@@ -57,7 +58,10 @@ export class ProductFormPageComponent implements OnDestroy {
     const updatedData: DbProduct = { id, name, description, category, price, stock }
     this.productsService.setProductToEdit(updatedData)
     this.productsService.editProduct().subscribe({
-      next: () => this.snackbar.open(successMsg, undefined, { duration: 2000 }),
+      next: () => {
+        this.snackbar.open(successMsg, undefined, { duration: 2000 })
+        this.router.navigateByUrl("")
+      },
       error: () => this.snackbar.open(errorMsg, undefined, { duration: 2000 })
     })
   }
@@ -106,7 +110,8 @@ export class ProductFormPageComponent implements OnDestroy {
   constructor(
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private router: Router
   ) {
     this.productsForm = new FormGroup(<ProductsFormControls>{
       name: new FormControl("", Validators.required),

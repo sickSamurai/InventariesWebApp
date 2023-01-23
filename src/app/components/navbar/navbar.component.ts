@@ -1,9 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 import { DailyReportsService } from 'src/app/services/daily-report.service'
 import { ProductsService } from 'src/app/services/products.service'
-
-import { Category } from '../../models/category.model'
-import { CategoriesService } from '../../services/categories.service'
 
 @Component({
   selector: "app-navbar",
@@ -11,7 +8,7 @@ import { CategoriesService } from '../../services/categories.service'
   styleUrls: ["./navbar.component.scss"]
 })
 export class NavbarComponent {
-  categories = new Array<Category>()
+  @Output() menuClicked = new EventEmitter()
 
   updateReport() {
     this.reportsService.getDailyReport().subscribe()
@@ -21,14 +18,5 @@ export class NavbarComponent {
     this.productsService.setMode("creation")
   }
 
-  constructor(
-    private categoriesService: CategoriesService,
-    private reportsService: DailyReportsService,
-    private productsService: ProductsService
-  ) {
-    this.categoriesService.updateCategories().subscribe()
-    this.categoriesService
-      .getCategories()
-      .subscribe(categoriesOnDb => (this.categories = categoriesOnDb))
-  }
+  constructor(private reportsService: DailyReportsService, private productsService: ProductsService) {}
 }
