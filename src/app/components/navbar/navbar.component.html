@@ -1,3 +1,20 @@
 <mat-toolbar color="primary">
-  <span>MotorPark</span>
+  <div>
+    <a mat-icon-button routerLink="/">
+      <i class="fa-solid fa-house"></i>
+    </a>
+    <a
+      mat-button
+      *ngFor="let category of categories"
+      routerLink="/products-by-categories/{{ category.id }}"
+      routerLinkActive="active"
+    >
+      {{ category.name }}
+    </a>
+  </div>
+  <div>
+    <a mat-button routerLink="/shoppingCart"> Ir a Carrito de Compras </a>
+    <a mat-button routerLink="/categoryForm" routerLinkActive="active">Crear Categoría</a>
+    <a mat-button routerLink="/productForm" routerLinkActive="active">Crear Producto</a>
+  </div>
 </mat-toolbar>

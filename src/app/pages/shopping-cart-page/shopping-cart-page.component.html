@@ -1,1 +1,10 @@
-<p>shoping-cart-page works!</p>
+<ng-container *ngIf="transactions.length > 0; else emptyShoppingCart">
+  <div>
+    <app-transactions-list [transactions]="transactions"></app-transactions-list>
+    <app-customer-form></app-customer-form>
+  </div>
+</ng-container>
+
+<ng-template #emptyShoppingCart>
+  <app-empty-shopping-cart></app-empty-shopping-cart>
+</ng-template>

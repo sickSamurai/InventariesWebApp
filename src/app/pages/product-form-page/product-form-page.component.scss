@@ -1,0 +1,23 @@
+form {
+  padding: 8px 0px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  width: 50%;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+mat-form-field {
+  width: 100%;
+}

@@ -1,0 +1,15 @@
+a.active {
+  color: #8bc34a;
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
