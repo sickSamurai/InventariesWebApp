@@ -15,7 +15,7 @@ export class ProductsByCategoryPageComponent {
   updateProducts() {
     this.activatedRoute.paramMap.subscribe(params => {
       const id = params.get("id")
-      if (id != null) this.productsService.updateProductsByCategory(id).subscribe()
+      if (id != null) this.productsService.requestProductsByCategory(id).subscribe()
     })
   }
 

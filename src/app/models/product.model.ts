@@ -9,7 +9,7 @@ export interface Product {
   price: number
 }
 
-export interface ProductToDb {
+export interface DbProduct {
   id: string
   name: string
   description?: string

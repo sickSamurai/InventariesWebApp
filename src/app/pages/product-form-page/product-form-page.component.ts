@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Subscription } from 'rxjs'
-import { ProductToDb } from 'src/app/models/product.model'
+import { DbProduct } from 'src/app/models/product.model'
 import { ProductsService } from 'src/app/services/products.service'
 
 import { Category } from '../../models/category.model'
@@ -24,25 +24,62 @@ interface ProductsFormControls {
 export class ProductFormPageComponent implements OnDestroy {
   categories = new Array<Category>()
   productsForm: FormGroup<ProductsFormControls>
-  subscriptionToCategories = new Subscription()
-  mode: "edition" | "creation" = "creation"
+  categoriesChangesSubscription = new Subscription()
+  modeChangesSubscription = new Subscription()
+  mode: "creation" | "edition" = "creation"
+  titles = { "creation": "Crea un nuevo producto", "edition": "Edita el producto" }
 
-  submitProduct() {
+  submitProduct = () => {
+    if (this.mode == "creation") this.createProduct()
+    else this.editProduct()
+  }
+
+  createProduct() {
     if (this.productsForm.invalid) return
     const { name, description, category, stock, price } = this.productsForm.value
-    this.productsService.setProductToSave(<ProductToDb>{ name, description, category, stock, price })
     const errorMsg = "Hubo un error al crear este producto"
     const successMsg = "Producto creado con éxito"
-    this.productsService.createProduct().subscribe({
+    this.productsService
+      .createProduct(<DbProduct>{ name, description, category, stock, price })
+      .subscribe({
+        next: () => this.snackbar.open(successMsg, undefined, { duration: 2000 }),
+        error: () => this.snackbar.open(errorMsg, undefined, { duration: 2000 })
+      })
+  }
+
+  editProduct() {
+    const successMsg = "Edición exitosa"
+    const errorMsg = "Hubo un error al momento de hacer la edición"
+    if (this.productsForm.invalid) return
+    let { name, description, category, price, stock } = this.productsForm.value
+    const id = this.productsService.productToEdit?.id
+    if (!id || !name || !price || !stock || !category) return
+    const updatedData: DbProduct = { id, name, description, category, price, stock }
+    this.productsService.setProductToEdit(updatedData)
+    this.productsService.editProduct().subscribe({
       next: () => this.snackbar.open(successMsg, undefined, { duration: 2000 }),
       error: () => this.snackbar.open(errorMsg, undefined, { duration: 2000 })
     })
   }
 
-  subscribeToCategories() {
-    this.subscriptionToCategories = this.categoriesService
+  subscribeToCategoriesChanges() {
+    this.categoriesChangesSubscription = this.categoriesService
       .getCategories()
       .subscribe(categoriesOnDb => (this.categories = categoriesOnDb))
+  }
+
+  subscribeToModeChanges() {
+    this.modeChangesSubscription = this.productsService.getMode().subscribe(mode => {
+      this.mode = mode
+      if (mode === "creation") this.productsForm.reset()
+      else {
+        if (!this.productsService.productToEdit) throw new Error("product to edit data is null")
+        let { name, category, price, stock, description } = this.productsService.productToEdit
+        if (!category) throw new Error("product to edit data is corrupted")
+        if (!description) description = ""
+        this.productsForm.setValue({ name, description, category: category, price, stock })
+      }
+    })
   }
 
   get priceError() {
@@ -62,7 +99,8 @@ export class ProductFormPageComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptionToCategories.unsubscribe()
+    this.categoriesChangesSubscription.unsubscribe()
+    this.modeChangesSubscription.unsubscribe()
   }
 
   constructor(
@@ -70,7 +108,6 @@ export class ProductFormPageComponent implements OnDestroy {
     private productsService: ProductsService,
     private snackbar: MatSnackBar
   ) {
-    this.subscribeToCategories()
     this.productsForm = new FormGroup(<ProductsFormControls>{
       name: new FormControl("", Validators.required),
       description: new FormControl(""),
@@ -78,5 +115,7 @@ export class ProductFormPageComponent implements OnDestroy {
       stock: new FormControl(0, [Validators.required, Validators.min(0)]),
       price: new FormControl(0, [Validators.required, Validators.min(0)])
     })
+    this.subscribeToModeChanges()
+    this.subscribeToCategoriesChanges()
   }
 }

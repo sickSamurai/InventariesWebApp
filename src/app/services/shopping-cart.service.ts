@@ -4,7 +4,7 @@ import { BehaviorSubject, tap } from 'rxjs'
 import { Product } from 'src/app/models/product.model'
 import { Transaction } from 'src/app/models/transaction.model'
 
-import { Bill } from '../models/Bill.model'
+import { Bill } from '../models/bill.model'
 import { Customer } from '../models/customer.model'
 import { TransactionDb } from '../models/transaction.model'
 import { ProductsService } from './products.service'
@@ -60,7 +60,7 @@ export class ShoppingCartService {
   generateBill(bill: Bill) {
     return this.httpClient
       .post(this.billsUrl, bill)
-      .pipe(tap(() => this.productsService.updateProducts().subscribe()))
+      .pipe(tap(() => this.productsService.requestProducts().subscribe()))
       .pipe(tap(() => this.transactions.next([])))
   }
 

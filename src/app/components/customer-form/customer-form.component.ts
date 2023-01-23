@@ -45,9 +45,17 @@ export class CustomerFormComponent {
     })
   }
 
+  get customerIdError() {
+    const errors = this.customerForm.controls.id.errors
+    if (!errors) return null
+    if (errors["required"]) return "El campo es requerido"
+    if (errors["pattern"]) return "Solo deberías ingresar números"
+    return null
+  }
+
   constructor(private shoppingCartService: ShoppingCartService, private snackBar: MatSnackBar) {
     this.customerForm = new FormGroup(<CustomerFormControls>{
-      id: new FormControl("", Validators.required),
+      id: new FormControl("", [Validators.required, Validators.pattern("[0-9]+")]),
       name: new FormControl("", Validators.required),
       phone: new FormControl("", Validators.pattern("[0-9]+")),
       email: new FormControl("", Validators.email),

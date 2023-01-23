@@ -8,7 +8,6 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { CustomerFormComponent } from './components/customer-form/customer-form.component'
-import { EmptyShoppingCartComponent } from './components/empty-shopping-cart/empty-shopping-cart.component'
 import { NavbarComponent } from './components/navbar/navbar.component'
 import { ProductItemComponent } from './components/product-item/product-item.component'
 import { ProductListComponent } from './components/product-list/product-list.component'
@@ -35,7 +34,6 @@ import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-c
     ProductListComponent,
     TransactionsListComponent,
     CustomerFormComponent,
-    EmptyShoppingCartComponent,
     DailyReportPageComponent
   ],
   imports: [

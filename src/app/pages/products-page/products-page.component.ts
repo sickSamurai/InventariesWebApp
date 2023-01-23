@@ -13,6 +13,6 @@ export class ProductsPageComponent {
 
   constructor(private productsService: ProductsService) {
     this.productsService.getAllProducts().subscribe(allProducts => (this.products = allProducts))
-    this.productsService.updateProducts().subscribe()
+    this.productsService.requestProducts().subscribe()
   }
 }

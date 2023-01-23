@@ -6,9 +6,9 @@
     <mat-card-content>
       <mat-form-field>
         <mat-label>Cédula</mat-label>
-        <input formControlName="id" matInput placeholder="1010038910" />
+        <input maxlength="15" formControlName="id" matInput placeholder="1010038910" />
         <mat-hint>Ingresa tu cédula</mat-hint>
-        <mat-error>Este campo es obligatorio</mat-error>
+        <mat-error>{{ customerIdError }}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
